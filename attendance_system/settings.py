@@ -25,18 +25,31 @@ SECRET_KEY = 'django-insecure-kgj-tl(1$h%+54i5^-k4)#r3i3qpt!q(1pjb7f!c%e!c1(8pc0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    # Django Apps come with Django and provide core functionality.
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third-party Apps
+    'rest_framework',
+    'django_filters',
+
+    # Local Apps
+    'users',
+    'students',
+    'teachers',
+    'courses',
+    'attendance',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -104,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
