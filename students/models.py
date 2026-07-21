@@ -14,3 +14,12 @@ class Student(models.Model):#This creates a new model called Student, which will
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)#CharField is used to store text data, and choices=GENDER_CHOICES restricts the values to the predefined gender options.
     def __str__(self):
         return self.user.get_full_name() or self.user.username   #This method defines how the Student object will be represented as a string. It returns the full name of the associated user if available; otherwise, it returns the username.
+    
+    
+class Teacher(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    employee_number = models.CharField(max_length=20, unique=True)
+    department = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.user.get_full_name() or self.user.username
