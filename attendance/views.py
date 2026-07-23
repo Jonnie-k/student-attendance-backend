@@ -4,5 +4,5 @@ from .serializers import AttendanceSerializer
 
 
 class AttendanceViewSet(viewsets.ModelViewSet):
-    queryset = Attendance.objects.all()
+    queryset = Attendance.objects.all().order_by("id")
     serializer_class = AttendanceSerializer
