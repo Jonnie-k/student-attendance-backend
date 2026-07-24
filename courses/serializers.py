@@ -3,10 +3,7 @@ from .models import Course
 
 
 class CourseSerializer(serializers.ModelSerializer):
-    teacher_name = serializers.CharField(
-        source="teacher.user.get_full_name",
-        read_only=True,
-    )
+    teacher_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
@@ -17,3 +14,11 @@ class CourseSerializer(serializers.ModelSerializer):
             "teacher",
             "teacher_name",
         ]
+
+    def get_teacher_name(self, obj):
+        full_name = obj.teacher.user.get_full_name()
+
+        if full_name:
+            return full_name
+
+        return obj.teacher.user.username
