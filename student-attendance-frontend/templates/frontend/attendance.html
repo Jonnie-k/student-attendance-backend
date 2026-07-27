@@ -1,0 +1,74 @@
+{% extends "frontend/base.html" %}
+
+{% block title %}Attendance{% endblock %}
+
+{% block content %}
+<form method="GET" class="mb-4">
+    <div class="input-group">
+        <input
+            type="text"
+            class="form-control"
+            name="search"
+            placeholder="Search..."
+            value="{{ search }}"
+        >
+        <button class="btn btn-primary">
+            Search
+        </button>
+    </div>
+</form>
+<div class="mb-3 text-end">
+    <a href="{% url 'add_attendance' %}" class="btn btn-primary">
+        + Add Attendance
+    </a>
+</div>
+<h2 class="mb-4">Attendance Records</h2>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+   {% for record in attendance %}
+   <tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ record.student_name }}</td>
+    <td>{{ record.course_name }}</td>
+    <td>{{ record.date }}</td>
+    <td>{{ record.status }}</td>
+
+    <td>
+        <a href="{% url 'edit_attendance' record.id %}"
+           class="btn btn-warning btn-sm">
+            Edit
+        </a>
+
+        <a href="{% url 'delete_attendance' record.id %}"
+           class="btn btn-danger btn-sm">
+            Delete
+        </a>
+    </td>
+</tr>
+
+    {% empty %}
+    <tr>
+        <td colspan="6" class="text-center">
+            No attendance records found.
+        </td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}

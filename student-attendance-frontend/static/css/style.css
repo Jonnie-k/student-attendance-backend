@@ -1,0 +1,144 @@
+body{
+    background:#f4f6f9;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Navbar */
+
+.navbar{
+    background:#198754 !important;
+}
+
+.navbar-brand{
+    font-size:1.4rem;
+    font-weight:bold;
+}
+
+/* Sidebar */
+
+.sidebar{
+    background:#198754;
+    min-height:100vh;
+    padding-top:20px;
+}
+
+.sidebar .nav-link{
+    color:white;
+    padding:14px 20px;
+    margin:6px 10px;
+    border-radius:10px;
+    transition:.3s;
+    font-weight:500;
+}
+
+.sidebar .nav-link:hover{
+    background:#157347;
+    color:white;
+    transform:translateX(5px);
+}
+
+.sidebar .nav-link.active{
+    background:white;
+    color:#198754 !important;
+    font-weight:bold;
+}
+
+.sidebar i{
+    width:22px;
+}
+
+/* Main Content */
+
+main{
+    padding:30px;
+}
+
+/* Cards */
+
+.card{
+    border:none;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
+    margin-bottom:20px;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h1{
+    font-size:3rem;
+    font-weight:bold;
+}
+
+.card h5{
+    font-weight:600;
+}
+
+/* Tables */
+
+.table{
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.table thead{
+    background:#212529;
+    color:white;
+}
+
+.table td,
+.table th{
+    vertical-align:middle;
+}
+
+/* Buttons */
+
+.btn{
+    border-radius:8px;
+}
+
+/* Forms */
+
+.form-control,
+.form-select{
+    border-radius:8px;
+}
+
+.form-control:focus,
+.form-select:focus{
+    box-shadow:none;
+    border-color:#198754;
+}
+
+/* Headings */
+
+h1,
+h2,
+h3{
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+/* Footer */
+
+footer{
+    color:#777;
+    margin-top:50px;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.sidebar{
+    min-height:auto;
+}
+
+main{
+    padding:20px;
+}
+
+}

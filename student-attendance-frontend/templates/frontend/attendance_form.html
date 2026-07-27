@@ -1,0 +1,216 @@
+{% extends "frontend/base.html" %}
+
+{% block title %}
+{% if attendance %}Edit Attendance{% else %}Add Attendance{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-warning text-dark py-3">
+
+                    <h3 class="mb-0">
+                        <i class="bi bi-calendar-check-fill me-2"></i>
+
+                        {% if attendance %}
+                            Edit Attendance
+                        {% else %}
+                            Add Attendance
+                        {% endif %}
+                    </h3>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            {{ error }}
+                        </div>
+                    {% endif %}
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Student
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <select
+                                    name="student"
+                                    class="form-select"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select Student
+                                    </option>
+
+                                    {% for student in students %}
+
+                                        <option
+                                            value="{{ student.id }}"
+                                            {% if attendance.student|stringformat:"s" == student.id|stringformat:"s" %}selected{% endif %}
+                                        >
+                                            {{ student.full_name|default:student.username }}
+                                        </option>
+
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Course
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <select
+                                    name="course"
+                                    class="form-select"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select Course
+                                    </option>
+
+                                    {% for course in courses %}
+
+                                        <option
+                                            value="{{ course.id }}"
+                                            {% if attendance.course|stringformat:"s" == course.id|stringformat:"s" %}selected{% endif %}
+                                        >
+                                            {{ course.course_name }}
+                                        </option>
+
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Date
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="date"
+                                    name="date"
+                                    class="form-control"
+                                    value="{{ attendance.date|default:'' }}"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Status
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <select
+                                    name="status"
+                                    class="form-select"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select Status
+                                    </option>
+
+                                    <option
+                                        value="Present"
+                                        {% if attendance.status == "Present" %}selected{% endif %}
+                                    >
+                                        ✅ Present
+                                    </option>
+
+                                    <option
+                                        value="Absent"
+                                        {% if attendance.status == "Absent" %}selected{% endif %}
+                                    >
+                                        ❌ Absent
+                                    </option>
+
+                                    <option
+                                        value="Late"
+                                        {% if attendance.status == "Late" %}selected{% endif %}
+                                    >
+                                        ⏰ Late
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between">
+
+                            <a
+                                href="{% url 'attendance' %}"
+                                class="btn btn-outline-secondary btn-lg"
+                            >
+                                <i class="bi bi-arrow-left-circle me-2"></i>
+                                Cancel
+                            </a>
+
+                            <button
+                                class="btn btn-success btn-lg"
+                                type="submit"
+                            >
+
+                                <i class="bi bi-check-circle-fill me-2"></i>
+
+                                {% if attendance %}
+                                    Update Attendance
+                                {% else %}
+                                    Save Attendance
+                                {% endif %}
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

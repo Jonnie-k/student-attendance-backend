@@ -1,0 +1,172 @@
+{% extends "frontend/base.html" %}
+
+{% block title %}
+{% if teacher %}Edit Teacher{% else %}Add Teacher{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-success text-white py-3">
+
+                    <h3 class="mb-0">
+                        <i class="bi bi-person-workspace me-2"></i>
+
+                        {% if teacher %}
+                            Edit Teacher
+                        {% else %}
+                            Add Teacher
+                        {% endif %}
+                    </h3>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            {{ error }}
+                        </div>
+                    {% endif %}
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Username <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="username"
+                                    class="form-control"
+                                    placeholder="Enter username"
+                                    value="{{ teacher.username|default:'' }}"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Employee Number <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="employee_number"
+                                    class="form-control"
+                                    placeholder="Enter employee number"
+                                    value="{{ teacher.employee_number|default:'' }}"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    First Name <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="first_name"
+                                    class="form-control"
+                                    placeholder="Enter first name"
+                                    value="{{ teacher.first_name|default:'' }}"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Last Name <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="last_name"
+                                    class="form-control"
+                                    placeholder="Enter last name"
+                                    value="{{ teacher.last_name|default:'' }}"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Department <span class="text-danger">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                name="department"
+                                class="form-control"
+                                placeholder="Enter department"
+                                value="{{ teacher.department|default:'' }}"
+                                required
+                            >
+
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between">
+
+                            <a href="{% url 'teachers' %}" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-arrow-left-circle me-2"></i>
+                                Cancel
+                            </a>
+
+                            <button class="btn btn-success btn-lg">
+
+                                <i class="bi bi-check-circle-fill me-2"></i>
+
+                                {% if teacher %}
+                                    Update Teacher
+                                {% else %}
+                                    Save Teacher
+                                {% endif %}
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

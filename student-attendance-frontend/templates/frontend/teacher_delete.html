@@ -1,0 +1,27 @@
+{% extends "frontend/base.html" %}
+
+{% block title %}Delete Teacher{% endblock %}
+
+{% block content %}
+
+<h2>Delete Teacher</h2>
+
+<p>
+    Are you sure you want to delete
+    <strong>{{ teacher.full_name|default:teacher.username }}</strong>?
+</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <button class="btn btn-danger">
+        Delete
+    </button>
+
+    <a href="{% url 'teachers' %}" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>
+
+{% endblock %}
