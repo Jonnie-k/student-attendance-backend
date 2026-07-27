@@ -15,10 +15,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
-SECRET_KEY = os.getenv(
-    "SECRET_KEY",
-    "django-insecure-2g@ptd26z(la37^!=em=e-q4yga**%-p$5myc+=@&p#2wqts3x",
-)
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
@@ -50,8 +47,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    "corsheaders",
-
     "frontend",
 ]
 
@@ -60,7 +55,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -138,9 +132,7 @@ STATICFILES_STORAGE = (
 
 WHITENOISE_USE_FINDERS = True
 
-# CORS
-
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS — not needed on the frontend (no API served here)
 
 # Authentication
 

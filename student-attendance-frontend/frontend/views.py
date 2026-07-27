@@ -77,18 +77,21 @@ def add_student(request):
         response = requests.post(
             f"{BASE_API}/students/",
             json=data,
+            timeout=30,
         )
 
         if response.status_code == 201:
             messages.success(request, "Student added successfully.")
             return redirect("students")
 
+        try:
+            error = response.json()
+        except Exception:
+            error = {"detail": "Unexpected error from server."}
         return render(
             request,
             "frontend/student_form.html",
-            {
-                "error": response.json(),
-            },
+            {"error": error},
         )
 
     return render(request, "frontend/student_form.html")
@@ -108,22 +111,23 @@ def edit_student(request, student_id):
             "gender": request.POST.get("gender"),
         }
 
-        response = requests.put(url, json=data)
+        response = requests.put(url, json=data, timeout=30)
 
         if response.status_code == 200:
             messages.success(request, "Student updated successfully.")
             return redirect("students")
 
+        try:
+            error = response.json()
+        except Exception:
+            error = {"detail": "Unexpected error from server."}
         return render(
             request,
             "frontend/student_form.html",
-            {
-                "student": data,
-                "error": response.json(),
-            },
+            {"student": data, "error": error},
         )
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=30)
 
     if response.status_code == 200:
         student = response.json()
@@ -131,9 +135,7 @@ def edit_student(request, student_id):
         return render(
             request,
             "frontend/student_form.html",
-            {
-                "student": student,
-            },
+            {"student": student},
         )
 
     messages.error(request, "Student not found.")
@@ -145,11 +147,11 @@ def delete_student(request, student_id):
     url = f"{BASE_API}/students/{student_id}/"
 
     if request.method == "POST":
-        requests.delete(url)
+        requests.delete(url, timeout=30)
         messages.success(request, "Student deleted successfully.")
         return redirect("students")
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=30)
 
     if response.status_code == 200:
         student = response.json()
@@ -203,18 +205,21 @@ def add_teacher(request):
         response = requests.post(
             f"{BASE_API}/teachers/",
             json=data,
+            timeout=30,
         )
 
         if response.status_code == 201:
             messages.success(request, "Teacher added successfully.")
             return redirect("teachers")
 
+        try:
+            error = response.json()
+        except Exception:
+            error = {"detail": "Unexpected error from server."}
         return render(
             request,
             "frontend/teacher_form.html",
-            {
-                "error": response.json(),
-            },
+            {"error": error},
         )
 
     return render(request, "frontend/teacher_form.html")
@@ -232,22 +237,23 @@ def edit_teacher(request, teacher_id):
             "employee_number": request.POST.get("employee_number"),
             "department": request.POST.get("department"),
         }
-        response = requests.put(url, json=data)
+        response = requests.put(url, json=data, timeout=30)
 
         if response.status_code == 200:
             messages.success(request, "Teacher updated successfully.")
             return redirect("teachers")
 
+        try:
+            error = response.json()
+        except Exception:
+            error = {"detail": "Unexpected error from server."}
         return render(
             request,
             "frontend/teacher_form.html",
-            {
-                "teacher": data,
-                "error": response.json(),
-            },
+            {"teacher": data, "error": error},
         )
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=30)
 
     if response.status_code == 200:
         teacher = response.json()
@@ -255,9 +261,7 @@ def edit_teacher(request, teacher_id):
         return render(
             request,
             "frontend/teacher_form.html",
-            {
-                "teacher": teacher,
-            },
+            {"teacher": teacher},
         )
 
     messages.error(request, "Teacher not found.")
@@ -269,11 +273,11 @@ def delete_teacher(request, teacher_id):
     url = f"{BASE_API}/teachers/{teacher_id}/"
 
     if request.method == "POST":
-        requests.delete(url)
+        requests.delete(url, timeout=30)
         messages.success(request, "Teacher deleted successfully.")
         return redirect("teachers")
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=30)
 
     if response.status_code == 200:
         teacher = response.json()
@@ -327,19 +331,21 @@ def add_course(request):
         response = requests.post(
             f"{BASE_API}/courses/",
             json=data,
+            timeout=30,
         )
 
         if response.status_code == 201:
             messages.success(request, "Course added successfully.")
             return redirect("courses")
 
+        try:
+            error = response.json()
+        except Exception:
+            error = {"detail": "Unexpected error from server."}
         return render(
             request,
             "frontend/course_form.html",
-            {
-                "teachers": teachers,
-                "error": response.json(),
-            },
+            {"teachers": teachers, "error": error},
         )
 
     return render(
@@ -364,23 +370,23 @@ def edit_course(request, course_id):
             "teacher": request.POST.get("teacher"),
         }
 
-        response = requests.put(url, json=data)
+        response = requests.put(url, json=data, timeout=30)
 
         if response.status_code == 200:
             messages.success(request, "Course updated successfully.")
             return redirect("courses")
 
+        try:
+            error = response.json()
+        except Exception:
+            error = {"detail": "Unexpected error from server."}
         return render(
             request,
             "frontend/course_form.html",
-            {
-                "teachers": teachers,
-                "course": data,
-                "error": response.json(),
-            },
+            {"teachers": teachers, "course": data, "error": error},
         )
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=30)
 
     if response.status_code == 200:
         course = response.json()
@@ -388,10 +394,7 @@ def edit_course(request, course_id):
         return render(
             request,
             "frontend/course_form.html",
-            {
-                "teachers": teachers,
-                "course": course,
-            },
+            {"teachers": teachers, "course": course},
         )
 
     messages.error(request, "Course not found.")
@@ -403,11 +406,11 @@ def delete_course(request, course_id):
     url = f"{BASE_API}/courses/{course_id}/"
 
     if request.method == "POST":
-        requests.delete(url)
+        requests.delete(url, timeout=30)
         messages.success(request, "Course deleted successfully.")
         return redirect("courses")
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=30)
 
     if response.status_code == 200:
         course = response.json()
@@ -457,20 +460,21 @@ def add_attendance(request):
         response = requests.post(
             f"{BASE_API}/attendance/",
             json=data,
+            timeout=30,
         )
 
         if response.status_code == 201:
             messages.success(request, "Attendance record added successfully.")
             return redirect("attendance")
 
+        try:
+            error = response.json()
+        except Exception:
+            error = {"detail": "Unexpected error from server."}
         return render(
             request,
             "frontend/attendance_form.html",
-            {
-                "students": students,
-                "courses": courses,
-                "error": response.json(),
-            },
+            {"students": students, "courses": courses, "error": error},
         )
 
     return render(
@@ -498,24 +502,23 @@ def edit_attendance(request, attendance_id):
             "status": request.POST.get("status"),
         }
 
-        response = requests.put(url, json=data)
+        response = requests.put(url, json=data, timeout=30)
 
         if response.status_code == 200:
             messages.success(request, "Attendance record updated successfully.")
             return redirect("attendance")
 
+        try:
+            error = response.json()
+        except Exception:
+            error = {"detail": "Unexpected error from server."}
         return render(
             request,
             "frontend/attendance_form.html",
-            {
-                "attendance": data,
-                "students": students,
-                "courses": courses,
-                "error": response.json(),
-            },
+            {"attendance": data, "students": students, "courses": courses, "error": error},
         )
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=30)
 
     if response.status_code == 200:
         attendance = response.json()
@@ -523,11 +526,7 @@ def edit_attendance(request, attendance_id):
         return render(
             request,
             "frontend/attendance_form.html",
-            {
-                "attendance": attendance,
-                "students": students,
-                "courses": courses,
-            },
+            {"attendance": attendance, "students": students, "courses": courses},
         )
 
     messages.error(request, "Attendance record not found.")
@@ -539,11 +538,11 @@ def delete_attendance(request, attendance_id):
     url = f"{BASE_API}/attendance/{attendance_id}/"
 
     if request.method == "POST":
-        requests.delete(url)
+        requests.delete(url, timeout=30)
         messages.success(request, "Attendance record deleted successfully.")
         return redirect("attendance")
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=30)
 
     if response.status_code == 200:
         attendance = response.json()

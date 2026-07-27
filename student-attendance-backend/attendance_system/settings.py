@@ -17,21 +17,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
 
-SECRET_KEY = os.getenv(
-    "SECRET_KEY",
-    "django-insecure-kgj-tl(1$h%+54i5^-k4)#r3i3qpt!q(1pjb7f!c%e!c1(8pc0",
-)
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = os.getenv(
-    "ALLOWED_HOSTS",
-    "localhost,127.0.0.1"
-).split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
 ]
+
+# Production security
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 
 # APPLICATIONS
@@ -165,7 +168,10 @@ LOGOUT_REDIRECT_URL = "home"
 
 # DJANGO REST FRAMEWORK
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = os.getenv(
+    "CORS_ALLOWED_ORIGINS",
+    "http://localhost:8000,http://127.0.0.1:8000",
+).split(",")
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
@@ -181,3 +187,5 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
 }
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

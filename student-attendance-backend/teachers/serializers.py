@@ -35,7 +35,7 @@ class TeacherSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.pop("user")
 
-        user = User.objects.create(
+        user = User.objects.create_user(
             username=user_data.get("username"),
             first_name=user_data.get("first_name", ""),
             last_name=user_data.get("last_name", ""),
