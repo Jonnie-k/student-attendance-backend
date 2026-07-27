@@ -64,9 +64,11 @@ class StudentSerializer(serializers.ModelSerializer):
         return value
 
     def validate_admission_number(self, value):
-        if Student.objects.filter(admission_number=value).exists():
+        qs = Student.objects.filter(admission_number=value)
+        if self.instance:
+            qs = qs.exclude(pk=self.instance.pk)
+        if qs.exists():
             raise serializers.ValidationError(
                 "Admission number already exists."
             )
-
         return value

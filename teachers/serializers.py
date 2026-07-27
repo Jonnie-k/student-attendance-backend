@@ -70,3 +70,13 @@ class TeacherSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+    def validate_employee_number(self, value):
+        qs = Teacher.objects.filter(employee_number=value)
+        if self.instance:
+            qs = qs.exclude(pk=self.instance.pk)
+        if qs.exists():
+            raise serializers.ValidationError(
+                "Employee number already exists."
+            )
+        return value
