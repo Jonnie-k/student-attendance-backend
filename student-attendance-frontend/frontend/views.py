@@ -9,7 +9,12 @@ BASE_API = "https://student-attendance-backend-h3hr.onrender.com/api"
 def fetch_all(url):
     results = []
     while url:
-        data = requests.get(url).json()
+        try:
+            response = requests.get(url, timeout=30)
+            response.raise_for_status()
+            data = response.json()
+        except Exception:
+            return results
         if isinstance(data, list):
             return data
         results.extend(data.get("results", []))
