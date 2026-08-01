@@ -1,0 +1,30 @@
+databases:
+  - name: student-attendance-db
+    plan: free
+    databaseName: attendance_system
+    user: attendance_system
+
+services:
+  - type: web
+    plan: free
+    name: student-attendance-backend
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn attendance_system.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: student-attendance-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://*.onrender.com"
+      - key: WEB_CONCURRENCY
+        value: "4"
+      - key: PYTHON_VERSION
+        value: "3.12.3"
