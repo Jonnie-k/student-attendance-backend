@@ -33,7 +33,15 @@
                     {% if error %}
                         <div class="alert alert-danger">
                             <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                            {{ error }}
+                            {% if error.items %}
+                                <ul class="mb-0 ps-3">
+                                    {% for field, msgs in error.items %}
+                                        <li><strong>{{ field }}:</strong> {{ msgs|join:", " }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                {{ error }}
+                            {% endif %}
                         </div>
                     {% endif %}
 
@@ -169,7 +177,7 @@
                                 Cancel
                             </a>
 
-                            <button class="btn btn-success btn-lg">
+                            <button class="btn btn-primary btn-lg">
 
                                 <i class="bi bi-check-circle-fill me-2"></i>
 

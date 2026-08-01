@@ -14,7 +14,7 @@
 
             <div class="card shadow-lg border-0 rounded-4">
 
-                <div class="card-header bg-warning text-dark py-3">
+                <div class="card-header bg-navy-light py-3">
 
                     <h3 class="mb-0">
                         <i class="bi bi-calendar-check-fill me-2"></i>
@@ -33,7 +33,15 @@
                     {% if error %}
                         <div class="alert alert-danger">
                             <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                            {{ error }}
+                            {% if error.items %}
+                                <ul class="mb-0 ps-3">
+                                    {% for field, msgs in error.items %}
+                                        <li><strong>{{ field }}:</strong> {{ msgs|join:", " }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                {{ error }}
+                            {% endif %}
                         </div>
                     {% endif %}
 
@@ -185,7 +193,7 @@
                             </a>
 
                             <button
-                                class="btn btn-success btn-lg"
+                                class="btn btn-primary btn-lg"
                                 type="submit"
                             >
 

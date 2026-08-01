@@ -1,144 +1,267 @@
-body{
-    background:#f4f6f9;
-    font-family:Arial, Helvetica, sans-serif;
+/* ==========================================================================
+   Student Attendance Management System
+   Professional theme — Navy / Blue / White
+   ========================================================================== */
+
+:root {
+    --color-navy: #0b1f3a;
+    --color-navy-dark: #071527;
+    --color-navy-light: #14335c;
+    --color-blue: #2563eb;
+    --color-blue-dark: #1d4ed8;
+    --color-blue-light: #3b82f6;
+    --color-blue-pale: #eaf1ff;
+    --color-white: #ffffff;
+    --color-bg: #f3f6fb;
+    --color-text: #1e293b;
+    --color-muted: #64748b;
+    --color-border: #e2e8f0;
+}
+
+body {
+    background: var(--color-bg);
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    color: var(--color-text);
+}
+
+a {
+    color: var(--color-blue);
 }
 
 /* Navbar */
 
-.navbar{
-    background:#198754 !important;
+.navbar {
+    background: var(--color-navy) !important;
+    box-shadow: 0 2px 10px rgba(11, 31, 58, .25);
 }
 
-.navbar-brand{
-    font-size:1.4rem;
-    font-weight:bold;
+.navbar-brand {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+
+.navbar-brand i {
+    color: var(--color-blue-light);
+    margin-right: 6px;
 }
 
 /* Sidebar */
 
-.sidebar{
-    background:#198754;
-    min-height:100vh;
-    padding-top:20px;
+.sidebar {
+    background: linear-gradient(180deg, var(--color-navy) 0%, var(--color-navy-dark) 100%);
+    min-height: 100vh;
+    padding-top: 20px;
 }
 
-.sidebar .nav-link{
-    color:white;
-    padding:14px 20px;
-    margin:6px 10px;
-    border-radius:10px;
-    transition:.3s;
-    font-weight:500;
+.sidebar .nav-link {
+    color: rgba(255, 255, 255, .8);
+    padding: 12px 18px;
+    margin: 4px 12px;
+    border-radius: 10px;
+    transition: .2s ease;
+    font-weight: 500;
 }
 
-.sidebar .nav-link:hover{
-    background:#157347;
-    color:white;
-    transform:translateX(5px);
+.sidebar .nav-link:hover {
+    background: rgba(255, 255, 255, .08);
+    color: var(--color-white);
+    transform: translateX(4px);
 }
 
-.sidebar .nav-link.active{
-    background:white;
-    color:#198754 !important;
-    font-weight:bold;
+.sidebar .nav-link.active {
+    background: var(--color-blue);
+    color: var(--color-white) !important;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, .35);
 }
 
-.sidebar i{
-    width:22px;
+.sidebar i {
+    width: 22px;
 }
 
-/* Main Content */
+/* Main content */
 
-main{
-    padding:30px;
+main {
+    padding: 30px;
 }
 
 /* Cards */
 
-.card{
-    border:none;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-    transition:.3s;
-    margin-bottom:20px;
+.card {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(11, 31, 58, .08);
+    transition: .25s ease;
+    margin-bottom: 20px;
 }
 
-.card:hover{
-    transform:translateY(-5px);
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(11, 31, 58, .12);
 }
 
-.card h1{
-    font-size:3rem;
-    font-weight:bold;
+.card h1 {
+    font-size: 2.75rem;
+    font-weight: 700;
 }
 
-.card h5{
-    font-weight:600;
+.card h5 {
+    font-weight: 600;
 }
 
-/* Tables */
-
-.table{
-    background:white;
-    border-radius:10px;
-    overflow:hidden;
+.card-header {
+    border-radius: 14px 14px 0 0 !important;
+    border-bottom: none;
+    font-weight: 600;
 }
 
-.table thead{
-    background:#212529;
-    color:white;
+/* Brand colour utilities (navy / blue / white theme) */
+
+.bg-navy {
+    background: var(--color-navy) !important;
+    color: var(--color-white) !important;
 }
 
-.table td,
-.table th{
-    vertical-align:middle;
+.bg-blue {
+    background: var(--color-blue) !important;
+    color: var(--color-white) !important;
+}
+
+.bg-blue-light {
+    background: var(--color-blue-light) !important;
+    color: var(--color-white) !important;
+}
+
+.bg-blue-pale {
+    background: var(--color-blue-pale) !important;
+    color: var(--color-navy) !important;
+}
+
+.bg-navy-light {
+    background: var(--color-navy-light) !important;
+    color: var(--color-white) !important;
+}
+
+.text-navy {
+    color: var(--color-navy) !important;
 }
 
 /* Buttons */
 
-.btn{
-    border-radius:8px;
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: var(--color-blue);
+    border-color: var(--color-blue);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: var(--color-blue-dark);
+    border-color: var(--color-blue-dark);
+}
+
+.btn-outline-secondary:hover {
+    background: var(--color-navy);
+    border-color: var(--color-navy);
+}
+
+/* Tables */
+
+.table {
+    background: var(--color-white);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead {
+    background: var(--color-navy);
+    color: var(--color-white);
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--color-blue-pale);
 }
 
 /* Forms */
 
 .form-control,
-.form-select{
-    border-radius:8px;
+.form-select {
+    border-radius: 8px;
+    border-color: var(--color-border);
 }
 
 .form-control:focus,
-.form-select:focus{
-    box-shadow:none;
-    border-color:#198754;
+.form-select:focus {
+    box-shadow: 0 0 0 .2rem rgba(37, 99, 235, .15);
+    border-color: var(--color-blue);
+}
+
+.form-label {
+    color: var(--color-navy);
+}
+
+/* Alerts */
+
+.alert-danger {
+    background-color: #fdeceb;
+    border-color: #f8d5d1;
+    color: #8c1d13;
+}
+
+.alert-success {
+    background-color: var(--color-blue-pale);
+    border-color: #cfe0ff;
+    color: var(--color-navy);
 }
 
 /* Headings */
 
 h1,
 h2,
-h3{
-    font-weight:bold;
-    margin-bottom:20px;
+h3 {
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--color-navy);
 }
 
 /* Footer */
 
-footer{
-    color:#777;
-    margin-top:50px;
+footer {
+    color: var(--color-muted);
+    margin-top: 50px;
+}
+
+/* Badges */
+
+.badge {
+    font-weight: 600;
+    padding: .5em .75em;
+}
+
+/* Progress bar */
+
+.progress-bar {
+    background-color: var(--color-blue) !important;
 }
 
 /* Responsive */
 
-@media(max-width:768px){
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+    }
 
-.sidebar{
-    min-height:auto;
-}
-
-main{
-    padding:20px;
-}
-
+    main {
+        padding: 20px;
+    }
 }

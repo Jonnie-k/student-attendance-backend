@@ -1,0 +1,30 @@
+{% extends "frontend/base.html" %}
+
+{% block title %}Backend Unavailable{% endblock %}
+
+{% block content %}
+
+<div class="d-flex flex-column align-items-center justify-content-center text-center py-5">
+
+    <div class="mb-4">
+        <i class="bi bi-hdd-network-fill display-1 text-primary"></i>
+    </div>
+
+    <h2 class="fw-bold mb-2">Unable to reach the backend API</h2>
+
+    <p class="text-muted col-lg-6">
+        The frontend could not connect to
+        <code>{{ base_api }}</code>.
+        Make sure the Django backend server is running
+        (<code>python manage.py runserver</code>) and that
+        <code>BASE_API_URL</code> in your <code>.env</code> file points to it.
+    </p>
+
+    <a href="{% url 'home' %}" class="btn btn-primary btn-lg mt-3">
+        <i class="bi bi-arrow-clockwise me-2"></i>
+        Retry
+    </a>
+
+</div>
+
+{% endblock %}
